@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+
+	/* Insert necessary style rules for your chosen visualization here */
+
+</style>
+		
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+$(function() {
+
+
+//Replace the query string ("q") with a query that makes sense for your index.
+//Replace the two fields at the end of this query URL with any two fields of your choosing from your index.
+
+jQuery.ajax({
+  url: 'http://localhost:8080/solr/biblio/select?q=allfields%3Aeconomic+AND+allfields%3Adevelopment&wt=json&indent=true&facet=true&facet.pivot=callnumber-first,topic_facet',
+  dataType: 'jsonp',
+  jsonp: 'json.wrf'
+  }).done(function(data) {
+	var fixedData = new Object();
+	var fixedDataChildren = new Array();
+
+	$.each(data.facet_counts.facet_pivot, function(facetIndex, facetData) {
+		$.each(facetData, function(parentIndex, parentData) {
+			info = new Array();
+			$.each(parentData.pivot, function(nodeIndex, nodeData) {
+				nodeInfo = new Object();
+				nodeInfo.name = nodeData.value;
+				nodeInfo.size = nodeData.count;
+				info.push(nodeInfo);
+			});
+			var parentNode = new Object;
+			parentNode.name = parentData.value;
+			parentNode.children = info;
+			fixedDataChildren.push(parentNode);
+		});
+		fixedData.name = "flare";
+		fixedData.children = fixedDataChildren;
+	});
+	  
+        console.log(fixedData);
+
+	//Insert Javascript code from https://github.com/mbostock/d3/wiki/Gallery or another source for your chosen visualization here, setting fixedData as the root node of your visualization.
+
+   });
+});
+</script>
+</head>
+<body>
+
+</body>
+</html>
