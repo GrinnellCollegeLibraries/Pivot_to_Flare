@@ -13,4 +13,5 @@ visualizations of your Solr data before you commit the resources to creating a p
 Detailed setup instructions are included in the comments in pivot_to_flare.html.
 
 More information about D3: http://d3js.org/
+
 A gallery of D3 examples for inspiration: https://github.com/mbostock/d3/wiki/Gallery
