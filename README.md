@@ -1,7 +1,9 @@
 Pivot_to_Flare
 ==============
 
-Convert Solr JSON pivot facet output to the "flare" JSON format used by D3 for hierarchical visualizations. 
+Convert Solr JSON pivot facet output to the type of JSON used by D3 for hierarchical visualizations.
+
+The name is a reference to the "flare.json" file frequently used as the data for D3 visualization examples.
 
 Requirements:
 Solr 4.0 or higher.
